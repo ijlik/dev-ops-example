@@ -76,5 +76,30 @@
             @yield('content')
         </main>
     </div>
+
+    @if (! empty(session('message')))
+        <script>
+            alert('{!! session("message") !!}')
+        </script>
+    @endif
+
+    @if (session()->has('status'))
+        <script>
+            alert('{!! session()->get("status") !!}')
+        </script>
+    @endif
+
+    @if (count($errors) > 0)
+        @php
+            $errMessage = '';
+            foreach ($errors->all() as $error){
+                $errMessage.=$error.', ';
+            }
+        @endphp
+
+        <script>
+            alert('{{ $errMessage }}')
+        </script>
+    @endif
 </body>
 </html>
